@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Book Titles{% endblock %}
+
+{% block content %}
+  {% for book in books %}
+    <div class="card mb-3 shadow-sm">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="{{ book.url }}" class="img-fluid rounded-start" alt="{{ book.title }} cover">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text"><strong>By:</strong> {{ book.authors | join(", ") }}</p>
+            <p class="card-text">
+              <small class="text-muted">Category: {{ book.category }} | Pages: {{ book.pages }}</small>
+            </p>
+            <p>{{ book.description[0] }}</p>
+            <p>{{ book.description[-1] }}</p>
+            <a href="#" class="btn btn-success btn-sm">More details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
