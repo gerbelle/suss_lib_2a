@@ -1,0 +1,26 @@
+body {
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    padding: 1.5rem;
+    border-right: 1px solid #ffffff;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 1.5rem;
+    width: 100%;
+}
+
+
+.sidebar-header {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ffffff; /* This color will be overridden in base.html but is fine as a fallback */
+}

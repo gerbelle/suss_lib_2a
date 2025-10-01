@@ -1,53 +1,87 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}SG Library{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SG Library{% endblock %}</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- nav bar css -->
+    <style>
+        .sidebar {
+            background-image:
+                url("{{ url_for('static', filename='images/Study-Space_High-table-2-cropped-300x200.png') }}");
+            background-size: cover;
+        }
+
+        .sidebar-header, .sidebar-header span {
+            color: #ffffff; /* White text for the header */
+            border-bottom-color: rgba(255, 255, 255, 0.2); /* Lighter border */
+        }
+
+        .sidebar .nav-link {
+            color: #ffffff; /* Light grey for links */
+        }
+        
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            color: #ffffff; /* White text for active/hover links */
+        }
+
+        .main-content header {
+            background-color: #BED1BE; /* A standard green color (like Bootstrap success) */
+            color: #000000; /* White text for contrast */
+           
+            padding-top: 10px; /* Add some padding for height */
+            padding-left: 10px; /* Adjust padding to match your layout */
+        }
+
+        .info-bar-green {
+            background-color: #d4edda; /* Light green background */
+            color: #155724; /* Dark green text */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .green-filter-bar {
+            background-color: #d4edda; /* Light green background */
+            color: #155724; /* Dark green text */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+
+    </style>
+    </head>
+<!-- nar bar -->
 <body>
-<!-- nav bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-<div class="container">
-<a class="navbar-brand d-flex align-items-center" href="{{ url_for('book_titles') }}">
-<img src="{{ url_for('static', filename='images/study_space.png') }}" alt="Study Space" width="48" height="48" class="me-2 rounded">
-<span class="fw-bold">SG Library</span>
-</a>
+<div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center justify-content-center">
+            <span class="fs-5 fw-bold">SG Library</span>
+        </div>
 
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('book_titles') }}">
+                    <i id="book-title-icon" class="bi-person-vcard"></i> Book Titles
+                </a>
+            </li>
+            </ul>
+    </div>
 
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-<span class="navbar-toggler-icon"></span>
-</button>
+    <div class="main-content">
+        <header class="pb-3 mb-4 border-bottom">
+            <h1 class="h3">{% block header %}BOOK TITLES{% endblock %}</h1>
+        </header>
 
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
 
-<div class="collapse navbar-collapse" id="mainNav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item">
-<a class="nav-link active" href="{{ url_for('book_titles') }}">Book Titles</a>
-</li>
-<!-- add more links here as needed -->
-</ul>
-</div>
-</div>
-</nav>
-
-
-<!-- title header -->
-<header class="py-3 bg-white border-bottom">
-<div class="container">
-<h1 class="h4 mb-0">{% block header %}BOOK TITLES{% endblock %}</h1>
-</div>
-</header>
-
-
-<main class="container my-4">
-{% block content %}{% endblock %}
-</main>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
