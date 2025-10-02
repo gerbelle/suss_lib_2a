@@ -3,24 +3,27 @@
 {% block title %}Book Titles{% endblock %}
 
 {% block content %}
-<div class="green-filter-bar d-flex justify-content-between align-items-center mb-3">
-    <div class="number-of-titles-box">
-        <span class="fw-bold">Number of titles: {{ books|length }}</span>
-    </div>
+<form method="GET" action="{{ url_for('book_titles') }}">
+    <div class="green-filter-bar d-flex justify-content-between align-items-center mb-3">
+        <div class="number-of-titles-box">
+            <span>Number of titles: {{ books|length }}</span>
+        </div>
 
-    <div class="d-flex align-items-center">
-        <span class="me-2 fw-bold">Category:</span>
-        
-        <select class="form-select me-2" style="width: auto;">
-            <option value="All">All</option>
-            <option value="Children">Children</option>
-            <option value="Teens">Teens</option>
-            <option value="Adult">Adult</option>
+        <div class="d-flex align-items-center">
+            <span class="me-2">Category:</span>
+            
+            <select class="form-select me-2" name="category" style="width: auto;">
+                <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All</option>
+                
+                {% for cat in unique_categories %}
+                    <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
             </select>
-        
-        <button class="btn btn-success">Search</button>
+            
+            <button class="btn btn-success" type="submit">Search</button>
+        </div>
     </div>
-</div>
+</form>
 
 
 {% for book in books %}
@@ -31,19 +34,20 @@
         </div>
         <div class="col-md-10">
             <div class="card-body">
-                <h5 class="card-title">{{ book.title }}  By: {{ book.authors | join(", ") }}</h5>
+                <h5 class="card-title">{{ book.title }} <br> By {{ book.authors | join(", ") }}</h5>
 
                 <p class="card-text">
                     <!-- category and genres -->
-                    <small class="text-muted"><strong>Category:</strong> {{ ([book.category] + book.genres) | join(", ") }}</small><br>
-                    <small class="text-muted"><strong>Pages:</strong> {{ book.pages }}</small>
+                    </h5>
+                    <small class="text-muted">Category: {{ ([book.category] + book.genres) | join(", ") }}</small><br>
+                    <small class="text-muted">Pages: {{ book.pages }}</small>
                 </p>
                 <!-- shows the first and last sentence of the description -->
                 <p class="card-text">{{ book.description[0] }}</p>
                 <p class="card-text">{{ book.description[-1] }}</p>
 
                 <div class="text-end">
-                    <a href="#" class="btn btn-success">More details</a>
+                    <a href="{{ url_for('book_detail', book_title=book.title) }}" class="btn btn-success">More details</a>
                 </div>
             </div>
         </div>

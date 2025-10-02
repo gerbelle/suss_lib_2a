@@ -18,9 +18,153 @@ body {
     width: 100%;
 }
 
-
 .sidebar-header {
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
     border-bottom: 1px solid #ffffff; /* This color will be overridden in base.html but is fine as a fallback */
+}
+.sidebar ul {
+    list-style: none;
+    padding-top: 10px;
+    margin: 0;
+}
+
+/* Define a fixed height for the mobile navigation when expanded */
+:root {
+    /* Adjust this value based on your content size. ~200px fits the visual example. */
+    --mobile-nav-height: 150px; 
+    --mobile-header-offset: 50px; /* Space for the fixed hamburger bar */
+}
+
+/* ----------------------------------------------------------------- */
+/* 1. SIDEBAR BASE STYLES & MOBILE COLLAPSE (LIMITED TOP-DOWN) */
+/* ----------------------------------------------------------------- */
+.sidebar {
+
+    background-image: url("images/Study-Space_High-table-2-cropped-300x200.png");
+    
+    background-size: cover;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    z-index: 1000;
+    padding-top: 15px; 
+    transition: all 0.3s ease; 
+    
+    /* DESKTOP/DEFAULT */
+    height: 100vh;
+    transform: none;
+}
+
+/* ----------------------------------------------------------------- */
+/* 2. MAIN CONTENT & TOGGLE BUTTON (MOBILE DEFAULT) */
+/* ----------------------------------------------------------------- */
+.main-content {
+    margin-left: 0;
+    padding: 15px; 
+    transition: margin-left 0.3s ease;
+    /* Reserve space for the fixed hamburger bar on top */
+    padding-top: var(--mobile-header-offset); 
+}
+
+/* The toggle button is fixed top-right on mobile */
+.sidebar-toggle {
+    display: block; 
+    position: fixed; 
+    z-index: 1010; 
+    top: 10px; 
+    right: 10px; 
+    left: auto;
+}
+
+/* ----------------------------------------------------------------- */
+/* 3. MEDIA QUERY: DESKTOP/TABLET (Fixed Left Sidebar) */
+/* ----------------------------------------------------------------- */
+@media (min-width: 768px) {
+    .sidebar {
+        height: 100vh;
+        position: fixed;
+    }
+
+    .main-content {
+        margin-left: 250px; 
+        /* Reset mobile padding back to normal desktop padding */
+        padding-top: 15px; 
+    }
+    
+    .sidebar-toggle {
+        display: none;
+    }
+}
+
+/* ----------------------------------------------------------------- */
+/* 4. MOBILE-SPECIFIC LAYOUT ADJUSTMENTS (< 768px) */
+/* ----------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+    .sidebar {
+        width: 100%; /* Full width */
+        max-height: 0; 
+        overflow: hidden; /* Hides content */
+        padding-top: 0;
+        left: 0;
+        right: 0;
+    }
+    .sidebar.active {
+        /* Limited height to prevent filling the whole screen */
+        max-height: var(--mobile-nav-height); 
+        overflow: hidden; 
+        padding-top: 0;
+    }
+    
+    .sidebar-header {
+        width: 100%; 
+        height: var(--mobile-header-offset); 
+        background: rgba(0, 0, 0, 0.4); 
+        z-index: 1001;
+        padding-top: 10px; 
+    }
+    
+    .sidebar ul {
+        margin-top: 0; 
+        padding-top: 10px; 
+    }
+}
+
+.sidebar-header, .sidebar-header span {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 0; 
+}
+
+.sidebar .nav-link {
+    color: #ffffff;
+    font-size: 1.20rem;
+}
+
+/* Main Content Header/Bar */
+.main-content header {
+    background-color: #BED1BE;
+    color: #000000;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-left: 0; 
+    margin-top: 0;
+}
+
+/* Filter Bar/Info Bar */
+.green-filter-bar {
+    background-color: #d4edda;
+    color: #10681e;
+    border-radius: 5px;
+    margin-top: 0 !important;
+   
+}
+
+.number-of-titles-box {
+    color: #155724; 
+}
+
+/* Icon spacing */
+#book-title-icon {
+    margin-right: 20px;
 }
