@@ -4,18 +4,18 @@
 
 {% block content %}
 <form method="GET" action="{{ url_for('book_titles') }}">
-    <div class="green-filter-bar d-flex justify-content-between align-items-center mb-3">
+    <div class="green-filter-bar d-flex justify-content-between align-items-center">
         <div class="number-of-titles-box">
             <span>Number of titles: {{ books|length }}</span>
         </div>
 
         <div class="d-flex align-items-center">
-            <span class="me-2">Category:</span>
+            <span class="me-2">Category</span>
             
             <select class="form-select me-2" name="category" style="width: auto;">
                 <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All</option>
                 
-                {% for cat in unique_categories %}
+                {% for cat in unique_categories %} <!--loop thru the uniq cat-->
                     <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
